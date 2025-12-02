@@ -27,7 +27,7 @@ export default function handler(req, res) {
   }
 
   // Ограничение результатов
-  const maxItems = parseInt(limit || 20);
+  const maxItems = parseInt(limit || 50);
   result = result.slice(0, maxItems);
 
   res.status(200).json(result);
