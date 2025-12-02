@@ -1,3 +1,4 @@
+// export default function handler(req, res)
 import products from '../data/products.json';
 
 export default function handler(req, res) {
@@ -5,10 +6,14 @@ export default function handler(req, res) {
 
   let result = products;
 
-  // Поиск по названию
+  // Поиск по названию ИЛИ ТОЧНОЕ СОВПАДЕНИЕ ПО SKU
   if (q) {
+    const qLower = q.toLowerCase();
     result = result.filter(p =>
-      p.name.toLowerCase().includes(q.toLowerCase())
+      // 1. Точное совпадение SKU (наивысший приоритет)
+      p.sku.toLowerCase() === qLower ||
+      // 2. Поиск по названию
+      p.name.toLowerCase().includes(qLower)
     );
   }
 
